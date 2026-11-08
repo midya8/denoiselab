@@ -160,6 +160,9 @@ uses tighter rtol=1e-10, atol=1e-12 on fixed models. No cross-BLAS bitwise train
 claim. CI limits BLAS threads and pins NumPy 2.2.6. SVG and browser export are
 byte-exact transformations of stored JSON; SVG metadata embeds the whole
 compressed report and binds hidden rows as well as the visible table and pixels.
+The gzip timestamp is zero and descriptive OS header is normalized to 255;
+Python 3.11/3.12 otherwise expose a platform OS byte for mtime=0. Payload and CRC
+are unchanged. The strict whole-SVG byte comparison remains enabled.
 
 No plausible-looking reconstruction is proof of true missing detail, semantic
 correctness, calibrated uncertainty or recoverability. No generative samples,
