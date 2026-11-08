@@ -184,3 +184,8 @@ privacy assurance are claimed.
 ## v0.2 fixed-mask input response
 
 [RESPONSE.md](RESPONSE.md) derives the manual input Jacobian, observed-only ridge response, clipping boundary semantics and finite-edit witnesses. Models, original metrics and protocol above are unchanged. No mask derivative, retraining, causal importance or finite-edit guarantee is added.
+
+
+## v0.3 exact scalar retrieval paths
+
+[PATH.md](PATH.md) derives complete rational nearest-neighbor intervals, separate endpoint ties and intended-source verification. Original source, fits and metrics above remain unchanged. This is a single observed-coordinate path, not a multicoordinate radius or binary64 tie guarantee.
