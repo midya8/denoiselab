@@ -189,3 +189,7 @@ privacy assurance are claimed.
 ## v0.3 exact scalar retrieval paths
 
 [PATH.md](PATH.md) derives complete rational nearest-neighbor intervals, separate endpoint ties and intended-source verification. Original source, fits and metrics above remain unchanged. This is a single observed-coordinate path, not a multicoordinate radius or binary64 tie guarantee.
+
+## Exact two-observed-coordinate retrieval slices (v0.4)
+
+[PLANE.md](PLANE.md) adds closed rational power cells for a fixed two-coordinate slice, including lower-dimensional and empty cells. It changes no fitted model, partition, mask audit or test score. The verifier checks source-supported cell geometry and infeasibility combinations separately from clipping. The current package has ten modules/nine commands; the current suite has 52 Python/fourteen Node tests. Prior v0.2/v0.3 test/package counts below or in their notes describe those releases, not current totals.
