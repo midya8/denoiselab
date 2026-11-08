@@ -179,3 +179,8 @@ privacy assurance are claimed.
 - Stanford STATS 306B, [PCA with Missing Data](https://web.stanford.edu/~lmackey/stats306b/doc/stats306b-spring14-lecture17_scribed.pdf), 2014. Teaching reference on observed-entry objectives and conditional ridge subproblems. No source code or scaling result copied.
 - Fleuret, [Denoising autoencoders](https://www.fleuret.org/dlc/materials/dlc-slides-7-3-denoising-autoencoders.pdf), teaching context on erasure and block corruption. No source measurement transferred.
 - Zhang et al., [A Survey on Masked Autoencoder for Visual Self-supervised Learning](https://www.ijcai.org/proceedings/2023/0762.pdf), IJCAI 2023. Distinguishes broad masked modeling from classical denoising. No ViT/MAE representation or downstream performance is claimed here.
+
+
+## v0.2 fixed-mask input response
+
+[RESPONSE.md](RESPONSE.md) derives the manual input Jacobian, observed-only ridge response, clipping boundary semantics and finite-edit witnesses. Models, original metrics and protocol above are unchanged. No mask derivative, retraining, causal importance or finite-edit guarantee is added.
