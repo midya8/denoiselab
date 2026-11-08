@@ -19,3 +19,11 @@ from pathlib import Path
 v=json.loads(Path('examples/edit-path.json').read_text());v['witness']=json.loads(Path('/tmp/denoiselab-edit-path.json').read_text())['path'];del v['value'];Path('/tmp/denoiselab-verify-path.json').write_text(json.dumps(v))
 PY2
 python -m denoiselab verify-path --input /tmp/denoiselab-verify-path.json
+
+python -m denoiselab edit-plane --input examples/edit-plane.json > "$out/plane.json"
+python - "$out" <<'PY3'
+import json,sys
+from pathlib import Path
+out=Path(sys.argv[1]);v=json.loads(Path('examples/edit-plane.json').read_text());v['witness']=json.loads((out/'plane.json').read_text())['plane'];del v['values'];(out/'verify-plane.json').write_text(json.dumps(v))
+PY3
+python -m denoiselab verify-plane --input "$out/verify-plane.json"
