@@ -97,20 +97,20 @@ target values. The CLI exits 2 for invalid JSON or inputs.
 
 ## Verification
 
-**44 Python tests** include 200 full-parameter finite differences against a
+**52 Python tests** include 200 full-parameter finite differences against a
 separate objective, a separate augmented least-squares PCA solve, nearest/tie
 controls, exact data hashes and no duplicate features, full refit with a test
 loader prohibition, full test re-evaluation, validation-only selection,
 tampering refusal, CLI paths, SVG pixels/values and complete report metadata.
 
-**Eleven Node/real-Chrome tests** compare independent JavaScript inference with
+**Fourteen Node/real-Chrome tests** compare independent JavaScript inference with
 Python on all 40 public test/mask examples, verify hidden-target erasure and
 visible-pixel identity, check a tiny analytic ridge solve, and exercise actual
 browser masks, keyboard controls, copy denial/success, downloads and responsive
 320/390/1280 layouts. The phone audit table stacks into labeled cards; it does
 not hide core values behind horizontal scrolling.
 
-CI also builds a wheel and runs all nine modules and seven CLI commands from
+CI also builds a wheel and runs all ten modules and nine CLI commands from
 outside the checkout, refitting and evaluating the installed package. Floating
 training is checked with explicit tolerances, not claimed bitwise portable
 across BLAS implementations. Exported files are exact from committed artifacts.
@@ -157,3 +157,9 @@ Nine new Python and three Node/Chrome tests bring the suite to 44/eleven. Indepe
 ```sh
 python -m denoiselab edit-path --input examples/edit-path.json
 ```
+
+## Two-pixel exact minimum cells (v0.4)
+
+[Move two observed values together](https://midya8.github.io/denoiselab/plane.html). Closed exact rational power cells include area, segment-only, point-only and explicitly proved empty regions. Shared boundaries use full all-row tie queries, not a polygon's interior representative. Fraction/BigInt witnesses retain every source coefficient. A source-matched verifier checks supporting halfplanes, maximal lower-dimensional cells and nonnegative infeasibility combinations without rerunning clipping.
+
+Eight new Python and three Node/Chrome tests bring the current suite to 52/fourteen. Independent boundary-pair enumeration checks 238 small-source cells and 2,110 queries. Forty full-source maps agree across languages; Chrome checks 160 queries and 30,720 canvas colors. Ten-module/nine-command installed reproduction retains the original full refit/evaluation. [PLANE.md](PLANE.md) records the geometry, separate verifier, source ledger and limits. Fixed two-coordinate slice only, not general robustness, plausible recourse, better accuracy or binary64 tie equivalence. Original models, data and held-out scores remain unchanged.
