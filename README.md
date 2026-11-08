@@ -16,7 +16,7 @@ these fixed-seed measurements is a universal ranking or an uncertainty bound.
 
 ## Try the browser inspector
 
-Open `docs/index.html` locally. It runs the learned network, an observed-pixel
+Open the [live reconstruction inspector](https://midya8.github.io/denoiselab/) or `docs/index.html` locally. It runs the learned network, an observed-pixel
 PCA ridge solve, observed-pixel nearest neighbor over all 3,062 fitting rows,
 and the fitting pixel mean. It does not replay frozen predictions when you
 change the mask: toggle arbitrary pixels, use keyboard controls, hide all or
