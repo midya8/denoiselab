@@ -7,6 +7,7 @@ class FigureTests(unittest.TestCase):
         s=render();self.assertEqual((ROOT.parent/'assets/denoise-audit.svg').read_text(),s)
         t=ET.fromstring(s);ns={'s':'http://www.w3.org/2000/svg'}
         m=t.find('s:metadata',ns)
+        self.assertEqual(base64.b64decode(m.text)[9],255,'gzip OS header must be portable')
         self.assertEqual(json.loads(gzip.decompress(base64.b64decode(m.text))),read(ROOT/'artifacts/report.json'))
     def test_every_shown_pixel_and_metric(self):
         t=ET.fromstring(render());ns={'s':'http://www.w3.org/2000/svg'};r=read(ROOT/'artifacts/report.json');e=r['cases'][1]['examples'][0]
