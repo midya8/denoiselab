@@ -35,7 +35,11 @@ def render(report=None):
     text(36,733,'Scattered-32 training only. Fixed block masks are a disclosed distribution shift, not a causal test.',16,'class="muted"')
     text(36,766,'Alpaydin & Kaynak (1998), UCI Optical Digits, CC BY 4.0. Code: MIT. No endorsement.',15,'class="muted"')
     text(36,796,'No calibrated uncertainty, image-file OCR, generation, semantic-preservation or real-world guarantee.',15,'class="muted"')
-    payload=base64.b64encode(gzip.compress(dumps(r).encode(),mtime=0)).decode()
+    compressed=bytearray(gzip.compress(dumps(r).encode(),mtime=0))
+    # CPython 3.11/3.12 delegate mtime=0 to zlib, whose OS header varies.
+    # The OS identifier is descriptive, not payload or CRC. Normalize to unknown.
+    compressed[9]=255
+    payload=base64.b64encode(compressed).decode()
     parts.append(f'<metadata id="report" data-sha256="{digest(r)}" data-format="base64-gzip-json">{payload}</metadata></svg>\n')
     return '\n'.join(parts)
 if __name__=='__main__':
