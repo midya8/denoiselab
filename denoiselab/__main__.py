@@ -11,7 +11,8 @@ def main():
     for name in ('train','evaluate'):
         s=sub.add_parser(name);s.add_argument('--output',type=Path,required=True)
     s=sub.add_parser('predict');s.add_argument('--model',type=Path,required=True);s.add_argument('--input',type=Path,required=True)
-    s=sub.add_parser('response');s.add_argument('--input',type=Path,required=True)
+    for name in ('response','edit-path','verify-path'):
+        s=sub.add_parser(name);s.add_argument('--input',type=Path,required=True)
     args=p.parse_args()
     try:
         if args.command=='demo':out=read(ROOT/'artifacts/report.json')
@@ -21,6 +22,15 @@ def main():
         elif args.command=='evaluate':
             from .experiment import evaluate
             out=evaluate(args.output)
+        elif args.command in ('edit-path','verify-path'):
+            from .edit_path import edit_path,query_path,verify_path
+            from .data import load
+            v=read(args.input);extra='value' if args.command=='edit-path' else 'witness'
+            if not isinstance(v,dict) or set(v)!={'pixels','mask','input_pixel',extra}:raise ValueError('path input requires pixels, mask, input_pixel and '+extra)
+            fit=load('train')[0][read(ROOT/'artifacts/protocol.json')['fit_indices']]
+            w=edit_path(fit,v['pixels'],v['mask'],v['input_pixel']) if args.command=='edit-path' else v['witness']
+            check=verify_path(w,fit,v['pixels'],v['mask'],v['input_pixel'])
+            out={'path':w,'verification':check,'query':query_path(w,v['value'])} if args.command=='edit-path' else check
         elif args.command=='response':
             from .network import Denoiser
             from .baselines import PCA
