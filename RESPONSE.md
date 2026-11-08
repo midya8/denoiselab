@@ -40,13 +40,13 @@ A scalar discontinuity control uses fitting rows [0,0] and [1,1] and mask [0,1].
 
 ## Independent checks
 
-The combined suite has 35 Python tests and eight Node/real-Chrome tests. The eight new Python tests cover full small-network input finite differences, every observed column of both saved-model 64×64 Jacobians, a separate augmented least-squares PCA coefficient reference, clipping saturation/boundaries, erased hidden-value equality, visible identity, no-input-mutation, all-hidden/all-visible masks, the nearest switch, invalid inputs and the new CLI.
+At v0.2, the combined suite had 35 Python tests and eight Node/real-Chrome tests. The v0.3 [path extension](PATH.md) adds its own checks without changing the derivative models. The eight new Python tests cover full small-network input finite differences, every observed column of both saved-model 64×64 Jacobians, a separate augmented least-squares PCA coefficient reference, clipping saturation/boundaries, erased hidden-value equality, visible identity, no-input-mutation, all-hidden/all-visible masks, the nearest switch, invalid inputs and the new CLI.
 
 One of three new Node tests compares 120 full native/scalar response witnesses across all 40 original public row/mask cases and three fixed edit values; this includes 983,040 Jacobian entries, full original/edited outputs, tangents, residuals and neighbor indices. A separate scalar finite-difference check verifies every observed input column for the saved neural and PCA models. Scalar controls test clipping, a discontinuous neighbor change and invalid input.
 
 One actual-Chrome test exercises 480 method/row/mask/edit views, independently recomputes their witnesses, inspects 8,192 actual signed-heatmap cell colors across every output coordinate, checks erase semantics, edit/reset, keyboard selection, clipboard success/failure, an actual Blob download and 320/390/1280 responsive overflow/touch targets. UI-to-module agreement is not a third mathematical oracle. Numerical derivatives use declared tolerances; no exact-real Jacobian claim is made.
 
-The installed wheel has eight modules including root and five commands. Its reproduction still refits and evaluates all original models outside the checkout and now also runs the response CLI. Original report and image exports remain byte-exact.
+The v0.2 installed wheel had eight modules including root and five commands; v0.3 adds the separately documented path module and two commands. Its reproduction still refits and evaluates all original models outside the checkout and now also runs the response CLI. Original report and image exports remain byte-exact.
 
 ## Run
 
