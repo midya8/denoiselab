@@ -1,0 +1,16 @@
+{
+  "optdigits.tra": {
+    "sha256": "e1b683cc211604fe8fd8c4417e6a69f31380e0c61d4af22e93cc21e9257ffedd",
+    "bytes": 563639,
+    "rows": 3823
+  },
+  "optdigits.tes": {
+    "sha256": "6ebb3d2fee246a4e99363262ddf8a00a3c41bee6014c373ed9d9216ba7f651b8",
+    "bytes": 264712,
+    "rows": 1797
+  },
+  "source_archive": {
+    "sha256": "0d7b054fea010270e9b3f06411c654c5e59547732ad626381980baffe0a23fb0",
+    "url": "https://archive.ics.uci.edu/static/public/80/optical+recognition+of+handwritten+digits.zip"
+  }
+}
