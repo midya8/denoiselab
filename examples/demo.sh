@@ -11,3 +11,11 @@ python examples/export_browser.py --check
 python examples/render_audit.py --check
 
 python -m denoiselab response --input examples/response.json > /tmp/denoiselab-response.json
+
+python -m denoiselab edit-path --input examples/edit-path.json > /tmp/denoiselab-edit-path.json
+python - <<'PY2'
+import json
+from pathlib import Path
+v=json.loads(Path('examples/edit-path.json').read_text());v['witness']=json.loads(Path('/tmp/denoiselab-edit-path.json').read_text())['path'];del v['value'];Path('/tmp/denoiselab-verify-path.json').write_text(json.dumps(v))
+PY2
+python -m denoiselab verify-path --input /tmp/denoiselab-verify-path.json
