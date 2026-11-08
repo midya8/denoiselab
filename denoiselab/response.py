@@ -22,7 +22,7 @@ def pca_jacobian(model,pixels,mask):
     for j in np.flatnonzero(boundary):
         if np.any(jac[j]!=0):rows[j]=[None]*d
         else:boundary[j]=False
-    return dict(prediction=np.where(hidden,np.clip(raw,0,1),x[0]).tolist(),jacobian=rows,raw_prediction=raw.tolist(),coefficients=coef.tolist(),clipped_output_rows=np.flatnonzero(outside).tolist(),undefined_output_rows=np.flatnonzero(boundary).tolist(),solve_residual=float(np.linalg.norm(gram@response-model.basis[:,observed])),scope='Observed-only ridge solve, followed by clipping. Derivative undefined on a clipping boundary.')
+    return dict(prediction=np.where(hidden,np.clip(raw,0,1),x[0]).tolist(),jacobian=rows,raw_prediction=raw.tolist(),coefficients=coef.tolist(),clipped_output_rows=np.flatnonzero(outside).tolist(),undefined_output_rows=np.flatnonzero(boundary).tolist(),solve_residual=float(np.linalg.norm(gram@response-model.basis[:,observed])),scope='Observed-only ridge solve, followed by clipping. Nonconstant output derivatives are undefined on a clipping boundary.')
 
 def response(network,pca,fit,pixels,mask,edited):
     if not isinstance(pixels,list) or not isinstance(edited,list) or not isinstance(mask,list):raise ValueError('pixels, mask and edited must be lists')
