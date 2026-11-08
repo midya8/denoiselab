@@ -97,20 +97,20 @@ target values. The CLI exits 2 for invalid JSON or inputs.
 
 ## Verification
 
-**27 Python tests** include 200 full-parameter finite differences against a
+**35 Python tests** include 200 full-parameter finite differences against a
 separate objective, a separate augmented least-squares PCA solve, nearest/tie
 controls, exact data hashes and no duplicate features, full refit with a test
 loader prohibition, full test re-evaluation, validation-only selection,
 tampering refusal, CLI paths, SVG pixels/values and complete report metadata.
 
-**Four Node/real-Chrome tests** compare independent JavaScript inference with
+**Eight Node/real-Chrome tests** compare independent JavaScript inference with
 Python on all 40 public test/mask examples, verify hidden-target erasure and
 visible-pixel identity, check a tiny analytic ridge solve, and exercise actual
 browser masks, keyboard controls, copy denial/success, downloads and responsive
 320/390/1280 layouts. The phone audit table stacks into labeled cards; it does
 not hide core values behind horizontal scrolling.
 
-CI also builds a wheel and runs all seven modules and four CLI commands from
+CI also builds a wheel and runs all eight modules and five CLI commands from
 outside the checkout, refitting and evaluating the installed package. Floating
 training is checked with explicit tolerances, not claimed bitwise portable
 across BLAS implementations. Exported files are exact from committed artifacts.
@@ -131,3 +131,17 @@ establish semantic preservation, calibrated uncertainty, image generation,
 clinical restoration or behavior on naturally missing observations. This is a
 standalone reconstruction experiment, not DigitLab's classifier/attack study
 or LatentLab's synthetic variational density model.
+
+## Fixed-mask input response (v0.2)
+
+The [response inspector](https://midya8.github.io/denoiselab/response.html) compares actual finite observed-pixel edits with hand-derived local neural and PCA responses. Full 64×64 Jacobians expose hidden-input erasure and visible-output identity. Shared-scale signed heatmaps retain every scalar derivative. Original/edited/tangent images and complete residuals stay separate; displayed images clamp grayscale, but JSON preserves unbounded tangent values.
+
+PCA solves its observed-only ridge response and marks nonconstant clipping-boundary rows null. Nearest-neighbor retrieval is treated as a possible discontinuous switch, not given a made-up global gradient. Its old/new original fitting-row indices and a clearly labeled frozen-neighbor control remain visible. Hidden targets, labels, mask derivatives and retraining are excluded. The original fits, holdout scores, model selection and stronger control results are unchanged.
+
+Eight new Python and four Node/Chrome tests add independent finite differences, augmented least squares, clipping and neighbor-switch controls, 120 full cross-language responses (983,040 Jacobian entries), 480 browser views and 8,192 actual heatmap pixel checks. Installed-wheel reproduction now covers eight modules and five commands, including the original full refit and evaluation. [RESPONSE.md](RESPONSE.md) records formulas, source scope and numerical limits.
+
+```sh
+python -m denoiselab response --input examples/response.json
+```
+
+Local response is not causal importance, finite-edit correctness, a certified stability radius, uncertainty or improved reconstruction accuracy. Masks are discrete and fixed per response query.
