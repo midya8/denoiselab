@@ -97,20 +97,20 @@ target values. The CLI exits 2 for invalid JSON or inputs.
 
 ## Verification
 
-**35 Python tests** include 200 full-parameter finite differences against a
+**44 Python tests** include 200 full-parameter finite differences against a
 separate objective, a separate augmented least-squares PCA solve, nearest/tie
 controls, exact data hashes and no duplicate features, full refit with a test
 loader prohibition, full test re-evaluation, validation-only selection,
 tampering refusal, CLI paths, SVG pixels/values and complete report metadata.
 
-**Eight Node/real-Chrome tests** compare independent JavaScript inference with
+**Eleven Node/real-Chrome tests** compare independent JavaScript inference with
 Python on all 40 public test/mask examples, verify hidden-target erasure and
 visible-pixel identity, check a tiny analytic ridge solve, and exercise actual
 browser masks, keyboard controls, copy denial/success, downloads and responsive
 320/390/1280 layouts. The phone audit table stacks into labeled cards; it does
 not hide core values behind horizontal scrolling.
 
-CI also builds a wheel and runs all eight modules and five CLI commands from
+CI also builds a wheel and runs all nine modules and seven CLI commands from
 outside the checkout, refitting and evaluating the installed package. Floating
 training is checked with explicit tolerances, not claimed bitwise portable
 across BLAS implementations. Exported files are exact from committed artifacts.
@@ -145,3 +145,15 @@ python -m denoiselab response --input examples/response.json
 ```
 
 Local response is not causal importance, finite-edit correctness, a certified stability radius, uncertainty or improved reconstruction accuracy. Masks are discrete and fixed per response query.
+
+## Every scalar retrieval switch (v0.3)
+
+The [exact edit-path inspector](https://midya8.github.io/denoiselab/path.html) shows every nearest-neighbor interval and every endpoint tie while one observed value moves over [0,1]. Quantized original inputs make source coefficients integer; a common quadratic cancels, leaving at most 17 candidate slopes. Fraction/BigInt lower envelopes retain coincident rows and point-only tie winners. A separate verifier recomputes the intended source and checks all-row endpoint dominance without regenerating the hull.
+
+Exact rational query buttons, complete tie lists, approximate-only image rendering and full JSON keep the scope visible: one observed coordinate, fixed other observed values and mask. This is not a simultaneous-input robustness radius or a guarantee of binary64 tie agreement. Original models, stronger controls and accuracy scores are unchanged.
+
+Nine new Python and three Node/Chrome tests bring the suite to 44/eleven. Independent all-pair enumeration checks 5,344 rational queries; 40 full cross-language path proofs and 160 source-grounded queries cover all original public cases; Chrome inspects 30,720 actual canvas colors. Nine-module/seven-command installed reproduction includes both path creation and independent-source verification. [PATH.md](PATH.md) gives the derivation, proof, exact arithmetic and source limits.
+
+```sh
+python -m denoiselab edit-path --input examples/edit-path.json
+```
