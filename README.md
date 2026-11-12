@@ -1,12 +1,12 @@
 # DenoiseLab
 
-Erase some pixels. What can a learned model actually recover from what remains?
+DenoiseLab reconstructs hidden pixels in small UCI digit images, then checks
+how the predictions change when visible values are edited. The network uses
+manual NumPy backpropagation; an independent scalar JavaScript implementation
+runs in the browser. Everything runs offline, without a model API or pretrained
+weights.
 
-A real-data masked-digit reconstruction project built with manual NumPy
-backpropagation and independent scalar JavaScript inference. No PyTorch,
-autograd, hosted model, paid API, private data or pretrained weights.
-
-The comparison keeps strong controls. On the original UCI test set at **16
+The measured results depend on the mask. On the original UCI test set at **16
 scattered missing pixels**, observed-pixel nearest neighbor and PCA both beat
 this neural network. At **32 missing pixels**, the network has lower measured
 MSE than those controls. At 48 missing pixels, the three are close. None of
@@ -14,7 +14,19 @@ these fixed-seed measurements is a universal ranking or an uncertainty bound.
 
 ![First fixed held-out reconstruction and all four corruption audits, including stronger controls](assets/denoise-audit.svg)
 
-## Try the browser inspector
+## Choose an inspector
+
+| Question | Page | Scope |
+| --- | --- | --- |
+| What is reconstructed from this mask? | [Reconstruction](https://midya8.github.io/denoiselab/) | Neural, PCA, neighbor and mean predictions |
+| How does a fixed-mask edit change the output? | [Local response](https://midya8.github.io/denoiselab/response.html) | Finite edits, local Jacobians and residuals |
+| Where does the nearest neighbor switch along one coordinate? | [One-pixel path](https://midya8.github.io/denoiselab/path.html) | Exact rational intervals and endpoint ties |
+| Which neighbor wins on a two-coordinate slice? | [Two-pixel cells](https://midya8.github.io/denoiselab/plane.html) | Exact area, segment, point and empty cells |
+
+The later inspectors examine the original fits. They do not improve the held-out
+scores or turn a fixed coordinate slice into a general robustness guarantee.
+
+## Reconstruction inspector
 
 Open the [live reconstruction inspector](https://midya8.github.io/denoiselab/) or `docs/index.html` locally. It runs the learned network, an observed-pixel
 PCA ridge solve, observed-pixel nearest neighbor over all 3,062 fitting rows,
@@ -132,13 +144,13 @@ clinical restoration or behavior on naturally missing observations. This is a
 standalone reconstruction experiment, not DigitLab's classifier/attack study
 or LatentLab's synthetic variational density model.
 
-## Fixed-mask input response (v0.2)
+## Fixed-mask input response
 
 The [response inspector](https://midya8.github.io/denoiselab/response.html) compares actual finite observed-pixel edits with hand-derived local neural and PCA responses. Full 64×64 Jacobians expose hidden-input erasure and visible-output identity. Shared-scale signed heatmaps retain every scalar derivative. Original/edited/tangent images and complete residuals stay separate; displayed images clamp grayscale, but JSON preserves unbounded tangent values.
 
 PCA solves its observed-only ridge response and marks nonconstant clipping-boundary rows null. Nearest-neighbor retrieval is treated as a possible discontinuous switch, not given a made-up global gradient. Its old/new original fitting-row indices and a clearly labeled frozen-neighbor control remain visible. Hidden targets, labels, mask derivatives and retraining are excluded. The original fits, holdout scores, model selection and stronger control results are unchanged.
 
-Eight new Python and four Node/Chrome tests add independent finite differences, augmented least squares, clipping and neighbor-switch controls, 120 full cross-language responses (983,040 Jacobian entries), 480 browser views and 8,192 actual heatmap pixel checks. Installed-wheel reproduction now covers eight modules and five commands, including the original full refit and evaluation. [RESPONSE.md](RESPONSE.md) records formulas, source scope and numerical limits.
+The v0.2 extension added eight Python and four Node/Chrome tests for independent finite differences, augmented least squares, clipping and neighbor-switch controls, 120 full cross-language responses (983,040 Jacobian entries), 480 browser views and 8,192 actual heatmap pixel checks. At v0.2, installed-wheel reproduction covered eight modules and five commands, including the original full refit and evaluation. [RESPONSE.md](RESPONSE.md) records formulas, source scope and numerical limits.
 
 ```sh
 python -m denoiselab response --input examples/response.json
@@ -146,20 +158,20 @@ python -m denoiselab response --input examples/response.json
 
 Local response is not causal importance, finite-edit correctness, a certified stability radius, uncertainty or improved reconstruction accuracy. Masks are discrete and fixed per response query.
 
-## Every scalar retrieval switch (v0.3)
+## One-pixel retrieval switches
 
 The [exact edit-path inspector](https://midya8.github.io/denoiselab/path.html) shows every nearest-neighbor interval and every endpoint tie while one observed value moves over [0,1]. Quantized original inputs make source coefficients integer; a common quadratic cancels, leaving at most 17 candidate slopes. Fraction/BigInt lower envelopes retain coincident rows and point-only tie winners. A separate verifier recomputes the intended source and checks all-row endpoint dominance without regenerating the hull.
 
 Exact rational query buttons, complete tie lists, approximate-only image rendering and full JSON keep the scope visible: one observed coordinate, fixed other observed values and mask. This is not a simultaneous-input robustness radius or a guarantee of binary64 tie agreement. Original models, stronger controls and accuracy scores are unchanged.
 
-Nine new Python and three Node/Chrome tests bring the suite to 44/eleven. Independent all-pair enumeration checks 5,344 rational queries; 40 full cross-language path proofs and 160 source-grounded queries cover all original public cases; Chrome inspects 30,720 actual canvas colors. Nine-module/seven-command installed reproduction includes both path creation and independent-source verification. [PATH.md](PATH.md) gives the derivation, proof, exact arithmetic and source limits.
+At v0.3, nine new Python and three Node/Chrome tests brought the suite to 44/eleven. Independent all-pair enumeration checks 5,344 rational queries; 40 full cross-language path proofs and 160 source-grounded queries cover all original public cases; Chrome inspects 30,720 actual canvas colors. Nine-module/seven-command installed reproduction includes both path creation and independent-source verification. [PATH.md](PATH.md) gives the derivation, proof, exact arithmetic and source limits.
 
 ```sh
 python -m denoiselab edit-path --input examples/edit-path.json
 ```
 
-## Two-pixel exact minimum cells (v0.4)
+## Two-pixel exact minimum cells
 
 [Move two observed values together](https://midya8.github.io/denoiselab/plane.html). Closed exact rational power cells include area, segment-only, point-only and explicitly proved empty regions. Shared boundaries use full all-row tie queries, not a polygon's interior representative. Fraction/BigInt witnesses retain every source coefficient. A source-matched verifier checks supporting halfplanes, maximal lower-dimensional cells and nonnegative infeasibility combinations without rerunning clipping.
 
-Eight new Python and three Node/Chrome tests bring the current suite to 52/fourteen. Independent boundary-pair enumeration checks 238 small-source cells and 2,110 queries. Forty full-source maps agree across languages; Chrome checks 160 queries and 30,720 canvas colors. Ten-module/nine-command installed reproduction retains the original full refit/evaluation. [PLANE.md](PLANE.md) records the geometry, separate verifier, source ledger and limits. Fixed two-coordinate slice only, not general robustness, plausible recourse, better accuracy or binary64 tie equivalence. Original models, data and held-out scores remain unchanged.
+The v0.4 extension added eight Python and three Node/Chrome tests, bringing the current suite to 52/fourteen. Independent boundary-pair enumeration checks 238 small-source cells and 2,110 queries. Forty full-source maps agree across languages; Chrome checks 160 queries and 30,720 canvas colors. Ten-module/nine-command installed reproduction retains the original full refit/evaluation. [PLANE.md](PLANE.md) records the geometry, separate verifier, source ledger and limits. Fixed two-coordinate slice only, not general robustness, plausible recourse, better accuracy or binary64 tie equivalence. Original models, data and held-out scores remain unchanged.
