@@ -127,6 +127,23 @@ outside the checkout, refitting and evaluating the installed package. Floating
 training is checked with explicit tolerances, not claimed bitwise portable
 across BLAS implementations. Exported files are exact from committed artifacts.
 
+The separate installed-suite job runs all 52 Python tests against a wheel in a
+fresh environment, outside the checkout. It checks ten module origins before
+and after the tests. Static browser data and figures are copied beside the
+installed package for the existing export tests; no library Python source is
+copied. A second step compares all nine complete command reports through both
+`python -m denoiselab` and the console command, including all seven fresh refit
+files, three fitted models and the full 1,797-row held-out evaluation.
+
+```sh
+python examples/check_installed.py --section tests
+python examples/check_installed.py --section commands
+```
+
+These are same-runtime packaging comparisons, not an independent numerical
+reference, a new training result or a portability claim. The earlier wheel job
+and its explicit floating-point tolerances remain separate and unchanged.
+
 ## Attribution and limits
 
 Data: Alpaydin, E. & Kaynak, C. (1998), [Optical Recognition of Handwritten
