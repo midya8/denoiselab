@@ -1,6 +1,6 @@
 # Two observed values, complete rational cells
 
-DenoiseLab v0.4 adds a two-coordinate nearest-neighbor slice over `(u,v) ∈ [0,1]²`. Every other observed input, the missing mask and all original fitting rows stay fixed. This is a closed minimum-cell map, not a classifier boundary, natural-image manifold, general robustness radius, causal recourse, uncertainty estimate or new accuracy result. Original trained models, source data, splits and test scores are unchanged.
+Digit denoising v0.4 adds a two-coordinate nearest-neighbor slice over `(u,v) ∈ [0,1]²`. Every other observed input, the missing mask and all original fitting rows stay fixed. This is a closed minimum-cell map, not a classifier boundary, natural-image manifold, general robustness radius, causal recourse, uncertainty estimate or new accuracy result. Original trained models, source data, splits and test scores are unchanged.
 
 ## Arithmetic and source contract
 
@@ -49,7 +49,7 @@ This is an educational mathematical/source consistency checker, not authenticati
 
 ## Browser and reproduction
 
-The [two-pixel inspector](https://midya8.github.io/denoiselab/plane.html) uses the unchanged first ten original test rows and four masks. Initial coordinates are the observed indices nearest 27 and 28, distinct and chosen for layout rather than number of regions, reconstruction quality or accuracy. Later selections are preserved when still valid for the next mask. There is no search for a successful example.
+The [two-pixel inspector](https://midya8.github.io/digit-denoising/plane.html) uses the unchanged first ten original test rows and four masks. Initial coordinates are the observed indices nearest 27 and 28, distinct and chosen for layout rather than number of regions, reconstruction quality or accuracy. Later selections are preserved when still valid for the next mask. There is no search for a successful example.
 
 Positive-area polygons are colored; additional segment-only cells are dashed black and point-only cells outlined. Approximate SVG coordinates never decide a query. Clicking the square explicitly snaps each value to a rational multiple of 1/256. Text input and exact sample, vertex and edge-midpoint buttons avoid that grid. The exact vertex coordinates, areas, coincident original row IDs, complete query tie sets, all source lines and every empty proof remain available as text/JSON. Invalid input is not applied and the last valid result stays labeled. Keyboard, clipboard failure/success and actual Blob download are tested. Missing input pixels are blue; visible edits are copied, not described as recovered details. No test label or hidden-pixel score is computed.
 
