@@ -1,6 +1,6 @@
 # Exact single-observed-coordinate retrieval paths
 
-DenoiseLab v0.3 adds complete rational nearest-neighbor paths over one normalized observed value `u ∈ [0,1]`, with every other observed value and mask fixed. It does not change a trained model, fit selection, original test score, data split or original browser export. It does not differentiate a mask, use hidden test values, use labels or refit a model.
+Digit denoising v0.3 adds complete rational nearest-neighbor paths over one normalized observed value `u ∈ [0,1]`, with every other observed value and mask fixed. It does not change a trained model, fit selection, original test score, data split or original browser export. It does not differentiate a mask, use hidden test values, use labels or refit a model.
 
 ## Scope first
 
@@ -59,7 +59,7 @@ This verifier is an educational mathematical/source consistency check, not a san
 
 ## What the browser shows
 
-[The path inspector](https://midya8.github.io/denoiselab/path.html) exposes the same first ten original public test rows and four original masks. Any observed pixel can be selected. No example is ranked by path complexity, successful reconstruction or accuracy. Initial pixel is the observed coordinate nearest index 27, a layout choice, not a best-result search.
+[The path inspector](https://midya8.github.io/digit-denoising/path.html) exposes the same first ten original public test rows and four original masks. Any observed pixel can be selected. No example is ranked by path complexity, successful reconstruction or accuracy. Initial pixel is the observed coordinate nearest index 27, a layout choice, not a best-result search.
 
 The colored bar shows open-interval extents, not probabilities. Exact interval fractions, all endpoint tie sets, selected original fitting-row IDs, all tied original IDs and rational squared distances remain in the text and downloadable witness. Buttons query exact rational interval midpoints and endpoints. An input accepts other supported rational values. Invalid input is explicitly not applied, keeping the last valid result labeled below it. Complete per-row line coefficients and source-checked proof status are retained. Candidate-group details show exact, potentially unreduced rational affine scores at the selected value; they omit only the common quadratic term.
 
