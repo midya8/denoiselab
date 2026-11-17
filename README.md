@@ -1,6 +1,6 @@
-# DenoiseLab
+# Digit denoising
 
-DenoiseLab reconstructs hidden pixels in small UCI digit images, then checks
+Digit denoising reconstructs hidden pixels in small UCI digit images, then checks
 how the predictions change when visible values are edited. The network uses
 manual NumPy backpropagation; an independent scalar JavaScript implementation
 runs in the browser. Everything runs offline, without a model API or pretrained
@@ -18,17 +18,17 @@ these fixed-seed measurements is a universal ranking or an uncertainty bound.
 
 | Question | Page | Scope |
 | --- | --- | --- |
-| What is reconstructed from this mask? | [Reconstruction](https://midya8.github.io/denoiselab/) | Neural, PCA, neighbor and mean predictions |
-| How does a fixed-mask edit change the output? | [Local response](https://midya8.github.io/denoiselab/response.html) | Finite edits, local Jacobians and residuals |
-| Where does the nearest neighbor switch along one coordinate? | [One-pixel path](https://midya8.github.io/denoiselab/path.html) | Exact rational intervals and endpoint ties |
-| Which neighbor wins on a two-coordinate slice? | [Two-pixel cells](https://midya8.github.io/denoiselab/plane.html) | Exact area, segment, point and empty cells |
+| What is reconstructed from this mask? | [Reconstruction](https://midya8.github.io/digit-denoising/) | Neural, PCA, neighbor and mean predictions |
+| How does a fixed-mask edit change the output? | [Local response](https://midya8.github.io/digit-denoising/response.html) | Finite edits, local Jacobians and residuals |
+| Where does the nearest neighbor switch along one coordinate? | [One-pixel path](https://midya8.github.io/digit-denoising/path.html) | Exact rational intervals and endpoint ties |
+| Which neighbor wins on a two-coordinate slice? | [Two-pixel cells](https://midya8.github.io/digit-denoising/plane.html) | Exact area, segment, point and empty cells |
 
 The later inspectors examine the original fits. They do not improve the held-out
 scores or turn a fixed coordinate slice into a general robustness guarantee.
 
 ## Reconstruction inspector
 
-Open the [live reconstruction inspector](https://midya8.github.io/denoiselab/) or `docs/index.html` locally. It runs the learned network, an observed-pixel
+Open the [live reconstruction inspector](https://midya8.github.io/digit-denoising/) or `docs/index.html` locally. It runs the learned network, an observed-pixel
 PCA ridge solve, observed-pixel nearest neighbor over all 3,062 fitting rows,
 and the fitting pixel mean. It does not replay frozen predictions when you
 change the mask: toggle arbitrary pixels, use keyboard controls, hide all or
@@ -163,7 +163,7 @@ or LatentLab's synthetic variational density model.
 
 ## Fixed-mask input response
 
-The [response inspector](https://midya8.github.io/denoiselab/response.html) compares actual finite observed-pixel edits with hand-derived local neural and PCA responses. Full 64×64 Jacobians expose hidden-input erasure and visible-output identity. Shared-scale signed heatmaps retain every scalar derivative. Original/edited/tangent images and complete residuals stay separate; displayed images clamp grayscale, but JSON preserves unbounded tangent values.
+The [response inspector](https://midya8.github.io/digit-denoising/response.html) compares actual finite observed-pixel edits with hand-derived local neural and PCA responses. Full 64×64 Jacobians expose hidden-input erasure and visible-output identity. Shared-scale signed heatmaps retain every scalar derivative. Original/edited/tangent images and complete residuals stay separate; displayed images clamp grayscale, but JSON preserves unbounded tangent values.
 
 PCA solves its observed-only ridge response and marks nonconstant clipping-boundary rows null. Nearest-neighbor retrieval is treated as a possible discontinuous switch, not given a made-up global gradient. Its old/new original fitting-row indices and a clearly labeled frozen-neighbor control remain visible. Hidden targets, labels, mask derivatives and retraining are excluded. The original fits, holdout scores, model selection and stronger control results are unchanged.
 
@@ -177,7 +177,7 @@ Local response is not causal importance, finite-edit correctness, a certified st
 
 ## One-pixel retrieval switches
 
-The [exact edit-path inspector](https://midya8.github.io/denoiselab/path.html) shows every nearest-neighbor interval and every endpoint tie while one observed value moves over [0,1]. Quantized original inputs make source coefficients integer; a common quadratic cancels, leaving at most 17 candidate slopes. Fraction/BigInt lower envelopes retain coincident rows and point-only tie winners. A separate verifier recomputes the intended source and checks all-row endpoint dominance without regenerating the hull.
+The [exact edit-path inspector](https://midya8.github.io/digit-denoising/path.html) shows every nearest-neighbor interval and every endpoint tie while one observed value moves over [0,1]. Quantized original inputs make source coefficients integer; a common quadratic cancels, leaving at most 17 candidate slopes. Fraction/BigInt lower envelopes retain coincident rows and point-only tie winners. A separate verifier recomputes the intended source and checks all-row endpoint dominance without regenerating the hull.
 
 Exact rational query buttons, complete tie lists, approximate-only image rendering and full JSON keep the scope visible: one observed coordinate, fixed other observed values and mask. This is not a simultaneous-input robustness radius or a guarantee of binary64 tie agreement. Original models, stronger controls and accuracy scores are unchanged.
 
@@ -189,6 +189,6 @@ python -m denoiselab edit-path --input examples/edit-path.json
 
 ## Two-pixel exact minimum cells
 
-[Move two observed values together](https://midya8.github.io/denoiselab/plane.html). Closed exact rational power cells include area, segment-only, point-only and explicitly proved empty regions. Shared boundaries use full all-row tie queries, not a polygon's interior representative. Fraction/BigInt witnesses retain every source coefficient. A source-matched verifier checks supporting halfplanes, maximal lower-dimensional cells and nonnegative infeasibility combinations without rerunning clipping.
+[Move two observed values together](https://midya8.github.io/digit-denoising/plane.html). Closed exact rational power cells include area, segment-only, point-only and explicitly proved empty regions. Shared boundaries use full all-row tie queries, not a polygon's interior representative. Fraction/BigInt witnesses retain every source coefficient. A source-matched verifier checks supporting halfplanes, maximal lower-dimensional cells and nonnegative infeasibility combinations without rerunning clipping.
 
 The v0.4 extension added eight Python and three Node/Chrome tests, bringing the current suite to 52/fourteen. Independent boundary-pair enumeration checks 238 small-source cells and 2,110 queries. Forty full-source maps agree across languages; Chrome checks 160 queries and 30,720 canvas colors. Ten-module/nine-command installed reproduction retains the original full refit/evaluation. [PLANE.md](PLANE.md) records the geometry, separate verifier, source ledger and limits. Fixed two-coordinate slice only, not general robustness, plausible recourse, better accuracy or binary64 tie equivalence. Original models, data and held-out scores remain unchanged.
